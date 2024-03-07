@@ -51,5 +51,37 @@ public async Task<IActionResult> Create(RestaurantCreate model)
     
     return View(model);
 }
+
+    // Restaurant Edit Get
+    [HttpGet]
+    public async Task<IActionResult> Edit(int id)
+    {
+        RestaurantDetail? restaurant = await _service.GetRestaurantAsync(id);
+        if (restaurant is null)
+            return NotFound();
+
+        RestaurantEdit model = new()
+        {
+            Id = restaurant.Id,
+            Name = restaurant.Name ?? "",
+            Location = restaurant.Location ?? ""
+        };
+
+        return View(model);
+    }
+
+    // Restaurant Edit Post
+    [HttpPost]
+    public async Task<IActionResult> Edit(int id, RestaurantEdit model)
+    {
+        if (!ModelState.IsValid)
+            return View(model);
+
+        if (await _service.UpdateRestaurantAsync(model))
+            return RedirectToAction(nameof(Details), new { id = id });
+
+        ModelState.AddModelError("Save Error", "Could not update the Restaurant. Please try again.");
+        return View(model);
+    }
     }
 }
