@@ -6,15 +6,14 @@ using Microsoft.EntityFrameworkCore;
 
 namespace RestaurantRaterMVC.Data
 {
-    public class RestaurantDbContext
+    public class RestaurantDbContext :DbContext
     {
-    public class RestaurantDbContext : DbContext
-{
+
     public RestaurantDbContext(DbContextOptions<RestaurantDbContext> options)
         : base(options) { }
 
     public DbSet<Restaurant> Restaurants { get; set; } = null!;
     public DbSet<Rating> Ratings { get; set; } = null!;
-}
+
     }
 }

@@ -19,7 +19,7 @@ namespace RestaurantRaterMVC.Data
     public string Location { get; set; } = string.Empty;
     
     public List<Rating> Ratings { get; set; } = new();
-    public double? AverageRating
+    public double AverageRating
     {
         get
         {
